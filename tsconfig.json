@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",              // Version JS cible
+    "module": "es2020",            // Pour Node.js ; sinon "ESNext" pour modules modernes
+    "outDir": "./dist",              // Dossier où JS compilé sera placé
+    "rootDir": "./src",              // Dossier source TS
+    "strict": true,                  // Active toutes les vérifications strictes
+    "esModuleInterop": true,         // Permet d'importer des modules CommonJS plus facilement
+    "forceConsistentCasingInFileNames": true, // Cas des fichiers cohérents
+    "skipLibCheck": true,            // Ignore la vérification des types des fichiers de dépendances
+    "sourceMap": true,               // Génère un fichier .map pour debugger
+    "resolveJsonModule": true,       // Permet d'importer des fichiers JSON
+    "noImplicitAny": true,           // Erreur si un type any implicite
+    "moduleResolution": "node"       // Pour résoudre les imports comme Node
+  },
+  "include": ["src/**/*"],           // Fichiers TS à compiler
+  "exclude": ["node_modules", "dist"] // Dossiers exclus
+}
