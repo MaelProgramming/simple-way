@@ -1,0 +1,1 @@
+{"version":3,"file":"createComponent.js","sourceRoot":"","sources":["../../src/core/createComponent.ts"],"names":[],"mappings":"AACA,MAAM,CAAC,OAAO,UAAU,eAAe,CAAC,IAAY,EAAE,OAAe;IACnE,MAAM,OAAO,GAAG,QAAQ,CAAC,aAAa,CAAC,IAAI,CAAC,CAAC;IAC7C,OAAO,CAAC,WAAW,GAAG,OAAO,CAAC;IAC9B,OAAO,OAAO,CAAC;AACjB,CAAC"}
