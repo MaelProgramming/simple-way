@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Framework Simple-Way</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Framework Simple-Way</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <script type="module" src="dist/index.js"></script>
+  <div id="Main-container">
+    <div id="toolbar">
+      <button id="createDiv">VIEW</button>
+      <button id="createButton">BUTTON</button>
+      <button id="createText">TEXT</button>
+      <button id="createImage">IMAGE</button>
+      <button id="toggleCode">💻 CODE</button>
+    </div>
+
+    <!-- Zone d’édition visuelle -->
+    <div id="editor"></div>
+
+    <!-- Zone d’édition du code -->
+    <div id="codeEditor">
+      <textarea id="codeArea"></textarea>
+      <button id="applyCode">Appliquer</button>
+    </div>
+  </div>
+
+  <script type="module" src="dist/index.js"></script>
 </body>
 </html>
