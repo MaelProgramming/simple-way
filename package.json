@@ -1,6 +1,6 @@
 {
-  "name": "simple-way",
-  "version": "1.0.0",
+  "name": "@maelgruand/simple-way",
+  "version": "1.0.1",
   "description": "Simple Way, a better way to develop applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "build": "tsc"
   },
   "keywords": ["framework", "typescript", "dom"],
-  "author": "Ton Nom",
+  "author": "Mael Gruand",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
