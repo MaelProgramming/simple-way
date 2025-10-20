@@ -1,4 +1,3 @@
-
 function createButton(id: string, functionToExecute: () => void, content: string): HTMLButtonElement {
   const btn = document.createElement("button");
   btn.id = id;
@@ -25,4 +24,35 @@ function createImage(id: string, path: string, alternative: string){
   image.alt = alternative
   return image
 }
-export {createButton as Button, createView as View, createParaph as Text, createImage as Image}
+function createInput(id: string, type: string){
+  const input = document.createElement("input")
+  input.type = type
+  input.id = id
+  return input
+}
+
+function createForm(
+  id: string,
+  method: "get" | "post" = "get",
+  action: (e: SubmitEvent) => void = () => {}
+): HTMLFormElement {
+  const form = document.createElement("form");
+  form.id = id;
+  form.method = method;
+  form.onsubmit = (e) => {
+    e.preventDefault(); // facultatif, évite le rechargement
+    action(e);
+  };
+  return form;
+}
+function createLink(
+  id: string,
+  toGo: string,
+): HTMLLinkElement {
+  const link = document.createElement("link")
+  link.id = id
+  link.href = toGo
+  return link
+}
+
+export {createButton as Button, createView as View, createParaph as Text, createImage as Image, createForm as Form, createLink as Link, createInput as Input}

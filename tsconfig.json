@@ -8,6 +8,7 @@
     "esModuleInterop": true,         // Permet d'importer des modules CommonJS plus facilement
     "forceConsistentCasingInFileNames": true, // Cas des fichiers cohérents
     "skipLibCheck": true,            // Ignore la vérification des types des fichiers de dépendances
+    "declaration": true,
     "sourceMap": true,               // Génère un fichier .map pour debugger
     "resolveJsonModule": true,       // Permet d'importer des fichiers JSON
     "noImplicitAny": true,           // Erreur si un type any implicite

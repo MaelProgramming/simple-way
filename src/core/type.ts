@@ -6,3 +6,4 @@ type ComponentInstance = {
   component: Component;
 };
 
+export type methodForm = "Get" | "Post"

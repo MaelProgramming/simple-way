@@ -23,5 +23,27 @@ function createImage(id, path, alternative) {
     image.alt = alternative;
     return image;
 }
-export { createButton as Button, createView as View, createParaph as Text, createImage as Image };
+function createInput(id, type) {
+    const input = document.createElement("input");
+    input.type = type;
+    input.id = id;
+    return input;
+}
+function createForm(id, method = "get", action = () => { }) {
+    const form = document.createElement("form");
+    form.id = id;
+    form.method = method;
+    form.onsubmit = (e) => {
+        e.preventDefault(); // facultatif, évite le rechargement
+        action(e);
+    };
+    return form;
+}
+function createLink(id, toGo) {
+    const link = document.createElement("link");
+    link.id = id;
+    link.href = toGo;
+    return link;
+}
+export { createButton as Button, createView as View, createParaph as Text, createImage as Image, createForm as Form, createLink as Link, createInput as Input };
 //# sourceMappingURL=Elements.js.map
