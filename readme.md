@@ -1,6 +1,6 @@
 # Simple Way
 
-**Simple Way** is a lightweight JavaScript/TypeScript framework to easily create DOM components: `View`, `Button`, `Form`, `Input`, `Text`, and `Link`.  
+**Simple Way** is a lightweight JavaScript/TypeScript framework to easily create DOM components: `View`, `Button`, `Form`, `Input`, `Text`, `Link`, ` Form `, ` Span `, ` List `,  ` Modal `, ` Tab `, `Toast`, `Toat Container`, `Navbar` , `Notifications`   
 It’s simple, fast, and usable in any front-end project.
 
 ---
@@ -24,6 +24,7 @@ npm install simple-way
   <meta charset="UTF-8">
   <title>Test Simple Way</title>
 </head>
+
 <body>
   <script type="module">
     import { View, Button, Input, Text, NavBar, Toast } 
@@ -57,7 +58,6 @@ npm install simple-way
 </body>
 </html>
 
-
 ```
 | Component                                | Description                                                           |
 | ---------------------------------------- | --------------------------------------------------------------------- |
@@ -75,6 +75,31 @@ npm install simple-way
 | `ToastContainer()`                       | Creates a container for toasts                                        |
 | `NavBar(id, links, background, color)`   | Creates a sticky navigation bar with links and optional styling       |
 
+
+### Notifications
+
+That framework include Notification creation using:
+```ts
+import { Notification } from "@maelgruand/simple-way";
+
+
+Notification.create("Hello !", { 
+  body: "That's a notification.", 
+  icon: "/icon.png" // your own icon of your page
+}, () => {
+  console.log("Notification cliquée !");
+});
+```
+
+### Included CSS classes
+| Element   | CSS Classes |
+|-----------|-------------|
+| Buttons   | `.muil-btn`, `.muil-btn-primary`, `.muil-btn-secondary` |
+| Inputs    | `.muil-input` |
+| Modals    | `.muil-modal-overlay`, `.muil-modal-box` |
+| Toasts    | `.muil-toast`, `.muil-toast-success`, `.muil-toast-error`, `.muil-toast-info` |
+| Navbar    | `.muil-navbar` |
+| Tabs      | `.muil-tabs-header button`, `.muil-tabs-header button.active` |
 
 ![npm](https://img.shields.io/npm/v/@maelgruand/simple-way)
 ![License](https://img.shields.io/npm/l/@maelgruand/simple-way)
