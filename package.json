@@ -1,12 +1,13 @@
 {
   "name": "@maelgruand/simple-way",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Simple Way, a better way to develop applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "tsc"
+    "build": "tsc",
+    "publish:public": "npm publish --access public"
   },
   "keywords": ["framework", "typescript", "dom"],
   "author": "Mael Gruand",
