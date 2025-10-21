@@ -1,20 +1,24 @@
+// 🟢 Mini Framework UI Vanilla TS avec CSS intégré
+import { Notification } from "./Notifications";
 /**
- * 🔘 Crée un bouton HTML avec un gestionnaire d'événement "click".
- * @param id - Identifiant unique du bouton.
- * @param functionToExecute - Fonction à exécuter lors du clic.
- * @param content - Texte affiché sur le bouton.
+ * 🔘 Crée un bouton HTML avec gestion de classe CSS et click.
  */
-function createButton(id: string, functionToExecute: () => void, content: string): HTMLButtonElement {
+function createButton(
+  id: string,
+  onClick: () => void,
+  content: string,
+  primary: boolean = true
+): HTMLButtonElement {
   const btn = document.createElement("button");
   btn.id = id;
   btn.textContent = content;
-  btn.addEventListener("click", functionToExecute);
+  btn.addEventListener("click", onClick);
+  btn.classList.add("muil-btn", primary ? "muil-btn-primary" : "muil-btn-secondary");
   return btn;
 }
 
 /**
- * 🧱 Crée une div (vue) générique pour contenir d'autres éléments.
- * @param id - Identifiant unique de la div.
+ * 🧱 Crée une div (vue) générique.
  */
 function createView(id: string): HTMLDivElement {
   const div = document.createElement("div");
@@ -23,11 +27,9 @@ function createView(id: string): HTMLDivElement {
 }
 
 /**
- * 📝 Crée un paragraphe <p> avec un texte.
- * @param id - Identifiant unique du paragraphe.
- * @param content - Contenu textuel du paragraphe.
+ * 📝 Crée un paragraphe <p>.
  */
-function createParaph(id: string, content: string) {
+function createParaph(id: string, content: string): HTMLParagraphElement {
   const paraph = document.createElement("p");
   paraph.id = id;
   paraph.innerText = content;
@@ -35,36 +37,29 @@ function createParaph(id: string, content: string) {
 }
 
 /**
- * 🖼️ Crée une image avec un chemin et un texte alternatif.
- * @param id - Identifiant unique de l'image.
- * @param path - Source (src) de l'image.
- * @param alternative - Texte alternatif (alt).
+ * 🖼️ Crée une image.
  */
-function createImage(id: string, path: string, alternative: string) {
+function createImage(id: string, path: string, alternative: string): HTMLImageElement {
   const image = document.createElement("img");
-  image.src = path;
   image.id = id;
+  image.src = path;
   image.alt = alternative;
   return image;
 }
 
 /**
- * ⌨️ Crée un champ de saisie HTML.
- * @param id - Identifiant unique.
- * @param type - Type de champ (text, password, number, etc.).
+ * ⌨️ Crée un champ de saisie.
  */
-function createInput(id: string, type: string) {
+function createInput(id: string, type: string): HTMLInputElement {
   const input = document.createElement("input");
-  input.type = type;
   input.id = id;
+  input.type = type;
+  input.classList.add("muil-input");
   return input;
 }
 
 /**
- * 📤 Crée un formulaire avec gestion d'événement "submit".
- * @param id - Identifiant unique.
- * @param method - Méthode HTTP ("get" ou "post").
- * @param action - Fonction à exécuter lors de la soumission.
+ * 📤 Crée un formulaire avec gestion de submit.
  */
 function createForm(
   id: string,
@@ -74,8 +69,6 @@ function createForm(
   const form = document.createElement("form");
   form.id = id;
   form.method = method;
-
-  // Empêche le rechargement et exécute la fonction d’action
   form.onsubmit = (e) => {
     e.preventDefault();
     action(e);
@@ -85,94 +78,66 @@ function createForm(
 
 /**
  * 🔗 Crée un lien cliquable (<a>).
- * @param id - Identifiant unique du lien.
- * @param toGo - URL vers laquelle le lien doit pointer.
- * @returns Un élément <a> prêt à être inséré dans le DOM.
  */
 function createLink(id: string, toGo: string, textContent: string): HTMLAnchorElement {
-  const link = document.createElement("a"); // Création du lien
-  link.id = id;                              // Attribution de l'ID
-  link.href = toGo;                          // URL cible
-  link.textContent = textContent;                   // Affiche l'URL comme texte par défaut
-  link.target = "_blank";                    // Ouvre dans un nouvel onglet
-  link.rel = "noopener noreferrer";          // Sécurité pour les liens externes
+  const link = document.createElement("a");
+  link.id = id;
+  link.href = toGo;
+  link.textContent = textContent;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
   return link;
 }
 
-
 /**
  * 💬 Crée un span avec texte et classe CSS.
- * @param id - Identifiant unique.
- * @param content - Texte à afficher.
- * @param cssClass - Classe CSS pour le style.
  */
 function createSpan(id: string, content: string, cssClass: string): HTMLSpanElement {
   const span = document.createElement("span");
-  span.innerText = content;
   span.id = id;
+  span.innerText = content;
   span.className = cssClass;
   return span;
 }
 
 /**
- * 📋 Crée une liste non ordonnée (<ul>) ou ordonnée (<ol>).
- * @param id - Identifiant unique.
- * @param items - Éléments à inclure dans la liste.
- * @param ordered - Si true, crée une <ol> au lieu d’une <ul>.
+ * 📋 Crée une liste (ul ou ol).
  */
-function createList(id: string, items: string[], ordered: boolean = false): HTMLUListElement | HTMLOListElement {
+function createList(
+  id: string,
+  items: string[],
+  ordered: boolean = false
+): HTMLUListElement | HTMLOListElement {
   const list = ordered ? document.createElement("ol") : document.createElement("ul");
   list.id = id;
-
   items.forEach(item => {
     const li = document.createElement("li");
     li.textContent = item;
     list.appendChild(li);
   });
-
   return list;
 }
 
 /**
- * 🪟 Crée une fenêtre modale simple avec titre et contenu.
- * @param id - Identifiant unique.
- * @param title - Titre de la fenêtre.
- * @param content - Contenu à afficher dans la modale.
+ * 🪟 Crée une modale.
  */
 function createModal(id: string, title: string, content: string): HTMLDivElement {
-  // Fond semi-transparent
   const overlay = document.createElement("div");
   overlay.id = id;
-  overlay.style.position = "fixed";
-  overlay.style.top = "0";
-  overlay.style.left = "0";
-  overlay.style.width = "100%";
-  overlay.style.height = "100%";
-  overlay.style.background = "rgba(0,0,0,0.4)";
-  overlay.style.display = "none";
-  overlay.style.justifyContent = "center";
-  overlay.style.alignItems = "center";
-  overlay.style.zIndex = "1000";
+  overlay.classList.add("muil-modal-overlay");
 
-  // Boîte de contenu
   const modalBox = document.createElement("div");
-  modalBox.style.background = "#fff";
-  modalBox.style.padding = "20px";
-  modalBox.style.borderRadius = "12px";
-  modalBox.style.width = "300px";
-  modalBox.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
-  modalBox.style.textAlign = "center";
+  modalBox.classList.add("muil-modal-box");
 
-  // Titre et texte
   const modalTitle = document.createElement("h3");
   modalTitle.textContent = title;
 
   const modalContent = document.createElement("p");
   modalContent.textContent = content;
 
-  // Bouton de fermeture
   const closeBtn = document.createElement("button");
   closeBtn.textContent = "Fermer";
+  closeBtn.classList.add("muil-btn", "muil-btn-secondary");
   closeBtn.onclick = () => (overlay.style.display = "none");
 
   modalBox.append(modalTitle, modalContent, closeBtn);
@@ -182,18 +147,16 @@ function createModal(id: string, title: string, content: string): HTMLDivElement
 }
 
 /**
- * 🧭 Crée un système d'onglets (Tabs) basique.
- * @param id - Identifiant unique.
- * @param tabs - Tableau d’onglets avec titre et contenu.
+ * 🧭 Crée un système d'onglets (Tabs).
  */
 function createTabs(id: string, tabs: { title: string; content: string }[]): HTMLDivElement {
   const container = document.createElement("div");
   container.id = id;
 
   const tabHeader = document.createElement("div");
+  tabHeader.classList.add("muil-tabs-header");
   tabHeader.style.display = "flex";
   tabHeader.style.gap = "10px";
-  tabHeader.style.cursor = "pointer";
 
   const tabContent = document.createElement("div");
   tabContent.style.marginTop = "10px";
@@ -201,33 +164,23 @@ function createTabs(id: string, tabs: { title: string; content: string }[]): HTM
   tabs.forEach((tab, index) => {
     const button = document.createElement("button");
     button.textContent = tab.title;
-    button.style.padding = "6px 12px";
-    button.style.borderRadius = "6px";
-    button.style.border = "1px solid #ccc";
-    button.style.background = index === 0 ? "#ddd" : "#f9f9f9";
-
-    // Changement de contenu à chaque clic
+    if(index === 0) button.classList.add("active");
     button.onclick = () => {
       tabContent.textContent = tab.content;
-
-      Array.from(tabHeader.children).forEach(btn =>
-        (btn as HTMLElement).style.background = "#f9f9f9"
-      );
-      button.style.background = "#ddd";
+      Array.from(tabHeader.children).forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
     };
-
     tabHeader.appendChild(button);
   });
 
-  // Contenu du premier onglet par défaut
   tabContent.textContent = tabs[0]?.content ?? "";
-
   container.append(tabHeader, tabContent);
+
   return container;
 }
 
 /**
- * 🍞 Crée le conteneur principal pour les toasts.
+ * 🍞 Crée le conteneur pour les toasts.
  */
 function createToastContainer(): HTMLDivElement {
   const container = document.createElement("div");
@@ -243,9 +196,7 @@ function createToastContainer(): HTMLDivElement {
 }
 
 /**
- * ⚡ Crée un toast (notification temporaire).
- * @param message - Texte du message.
- * @param type - Type de notification : success | error | info.
+ * ⚡ Crée un toast (notification).
  */
 function createToast(message: string, type: "success" | "error" | "info" = "info"): void {
   let container = document.getElementById("toast-container") as HTMLDivElement;
@@ -256,40 +207,22 @@ function createToast(message: string, type: "success" | "error" | "info" = "info
 
   const toast = document.createElement("div");
   toast.textContent = message;
-  toast.style.padding = "10px 16px";
-  toast.style.borderRadius = "8px";
-  toast.style.color = "#fff";
-  toast.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
-  toast.style.opacity = "0";
-  toast.style.transition = "opacity 0.3s ease";
-
-  const colors = {
-    success: "#4CAF50",
-    error: "#F44336",
-    info: "#2196F3",
-  };
-  toast.style.background = colors[type];
-
+  toast.classList.add("muil-toast", `muil-toast-${type}`);
   container.appendChild(toast);
 
-  // Apparition
-  requestAnimationFrame(() => {
-    toast.style.opacity = "1";
-  });
-
-  // Disparition automatique après 3 secondes
+  requestAnimationFrame(() => toast.style.opacity = "1");
   setTimeout(() => {
     toast.style.opacity = "0";
     setTimeout(() => toast.remove(), 300);
   }, 3000);
 }
 
+
+Notification.create("Nouvelle alerte !", { body: "Tu as un nouveau message !" }, () => {
+  console.log("Notification cliquée !");
+});
 /**
- * 🧭 Crée une barre de navigation simple et stylée.
- * @param id - Identifiant unique.
- * @param links - Tableau de liens {label, href}.
- * @param background - Couleur d’arrière-plan.
- * @param color - Couleur du texte.
+ * 🧭 Crée une barre de navigation.
  */
 function createNavbar(
   id: string,
@@ -299,39 +232,27 @@ function createNavbar(
 ): HTMLElement {
   const nav = document.createElement("nav");
   nav.id = id;
-  nav.style.display = "flex";
-  nav.style.justifyContent = "space-between";
-  nav.style.alignItems = "center";
-  nav.style.padding = "10px 20px";
+  nav.classList.add("muil-navbar");
   nav.style.background = background;
   nav.style.color = color;
-  nav.style.position = "sticky";
-  nav.style.top = "0";
-  nav.style.zIndex = "100";
 
-  // Logo / titre du site
   const title = document.createElement("span");
   title.textContent = document.title || "Mon Site";
   title.style.fontWeight = "bold";
   title.style.fontSize = "1.1rem";
 
-  // Conteneur de liens
   const linkContainer = document.createElement("div");
   linkContainer.style.display = "flex";
   linkContainer.style.gap = "16px";
 
-  // Création de chaque lien
   links.forEach(link => {
     const a = document.createElement("a");
     a.textContent = link.label;
     a.href = link.href;
     a.style.color = color;
     a.style.textDecoration = "none";
-    a.style.transition = "0.2s";
-
-    a.onmouseenter = () => (a.style.opacity = "0.7");
-    a.onmouseleave = () => (a.style.opacity = "1");
-
+    a.onmouseenter = () => a.style.opacity = "0.7";
+    a.onmouseleave = () => a.style.opacity = "1";
     linkContainer.appendChild(a);
   });
 
@@ -339,15 +260,15 @@ function createNavbar(
   return nav;
 }
 
-// 🧩 Exporte toutes les fonctions sous forme de composants de ton mini framework
+// 🧩 Exports
 export {
   createButton as Button,
   createView as View,
   createParaph as Text,
   createImage as Image,
+  createInput as Input,
   createForm as Form,
   createLink as Link,
-  createInput as Input,
   createSpan as Span,
   createList as List,
   createModal as Modal,
