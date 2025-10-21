@@ -13,7 +13,7 @@ npm install github:MaelProgramming/simple-way
 ```
 From npm (once published)
 ```bash
-npm install simple-way
+npm install @maelgruand/simple-way@1.0.5
 ```
 ### Basic Exemples
 
