@@ -1,5 +1,8 @@
 // 🟢 Mini Framework UI Vanilla TS avec CSS intégré
 import { Notification } from "./Notifications";
+import { Database } from "./database/Database";
+import { IndexedDBDriver } from "./database/IndexDB-driver";
+
 /**
  * 🔘 Crée un bouton HTML avec gestion de classe CSS et click.
  */
@@ -87,6 +90,19 @@ function createLink(id: string, toGo: string, textContent: string): HTMLAnchorEl
   link.target = "_blank";
   link.rel = "noopener noreferrer";
   return link;
+}
+
+export function createDatabase(providerName: string, stores: string[] = []): Database {
+  // Ici on choisit IndexedDB comme driver pour l’instant
+  const driver = new IndexedDBDriver(providerName, 1, stores);
+  const db = new Database(driver);
+
+  // On connecte la base dès la création
+  db.connect().catch((err) => {
+    console.error("Failed to connect to database:", err);
+  });
+
+  return db;
 }
 
 /**
@@ -275,5 +291,6 @@ export {
   createTabs as Tab,
   createToast as Toast,
   createToastContainer as ToastContainer,
-  createNavbar as NavBar
+  createNavbar as NavBar,
+  createDatabase as DB
 };

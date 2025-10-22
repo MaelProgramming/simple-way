@@ -101,5 +101,28 @@ Notification.create("Hello !", {
 | Navbar    | `.muil-navbar` |
 | Tabs      | `.muil-tabs-header button`, `.muil-tabs-header button.active` |
 
+
+
+
+### New Modification 
+Added database provider in core/Elements.ts
+
+
+* Introduced the createDatabase function to initialize and connect a database.
+
+* Currently supports IndexedDBDriver as the default provider.
+
+* Allows specifying the database name (providerName) and stores/collections (stores).
+
+* Returns a ready-to-use Database instance with all CRUD operations.
+
+```ts
+import { DB } from './index.ts'
+
+const db = DB("MyAppDB", ["users", "posts"]);
+await db.insert("users", { name: "YourName", age: 18 })
+
+```
+
 ![npm](https://img.shields.io/npm/v/@maelgruand/simple-way)
 ![License](https://img.shields.io/npm/l/@maelgruand/simple-way)
