@@ -1,5 +1,7 @@
 // 🟢 Mini Framework UI Vanilla TS avec CSS intégré
 import { Notification } from "./Notifications";
+import { Database } from "./database/Database";
+import { IndexedDBDriver } from "./database/IndexDB-driver";
 /**
  * 🔘 Crée un bouton HTML avec gestion de classe CSS et click.
  */
@@ -72,6 +74,16 @@ function createLink(id, toGo, textContent) {
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     return link;
+}
+export function createDatabase(providerName, stores = []) {
+    // Ici on choisit IndexedDB comme driver pour l’instant
+    const driver = new IndexedDBDriver(providerName, 1, stores);
+    const db = new Database(driver);
+    // On connecte la base dès la création
+    db.connect().catch((err) => {
+        console.error("Failed to connect to database:", err);
+    });
+    return db;
 }
 /**
  * 💬 Crée un span avec texte et classe CSS.
@@ -212,5 +224,5 @@ function createNavbar(id, links, background = "#1e1e1e", color = "#ffffff") {
     return nav;
 }
 // 🧩 Exports
-export { createButton as Button, createView as View, createParaph as Text, createImage as Image, createInput as Input, createForm as Form, createLink as Link, createSpan as Span, createList as List, createModal as Modal, createTabs as Tab, createToast as Toast, createToastContainer as ToastContainer, createNavbar as NavBar };
+export { createButton as Button, createView as View, createParaph as Text, createImage as Image, createInput as Input, createForm as Form, createLink as Link, createSpan as Span, createList as List, createModal as Modal, createTabs as Tab, createToast as Toast, createToastContainer as ToastContainer, createNavbar as NavBar, createDatabase as DB };
 //# sourceMappingURL=Elements.js.map

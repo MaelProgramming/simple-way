@@ -9,12 +9,20 @@
     "build": "tsc",
     "publish:public": "npm publish --access public"
   },
-  "keywords": ["framework", "typescript", "dom"],
+  "keywords": [
+    "framework",
+    "typescript",
+    "dom"
+  ],
   "author": "Mael Gruand",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
     "typescript": "^5.0.0",
     "vite": "^7.1.10"
+  },
+  "dependencies": {
+    "@types/node": "^24.9.1",
+    "ts-php-bridge": "^1.0.0"
   }
 }

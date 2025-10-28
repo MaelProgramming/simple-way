@@ -3,6 +3,7 @@ import { Notification } from "./Notifications";
 import { Database } from "./database/Database";
 import { IndexedDBDriver } from "./database/IndexDB-driver";
 
+
 /**
  * 🔘 Crée un bouton HTML avec gestion de classe CSS et click.
  */
