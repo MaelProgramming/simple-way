@@ -124,5 +124,53 @@ await db.insert("users", { name: "YourName", age: 18 })
 
 ```
 
+
+### Adding backend integration
+
+This framework now supports dynamic PHP backend calls via HTTP, making it easy to connect frontend logic to PHP scripts.
+
+#### Setup
+
+
+1. Make sure a PHP server is running (XAMPP, WAMP, Laragon, etc.).
+
+2. Place your PHP scripts in a folder, e.g., php/. Example:
+``` bash
+php/
+├─ getUser.php
+└─ processData.php
+
+```
+Example for `php/getUser.php`
+
+```php
+<?php
+header('Content-Type: application/json');
+
+$input = json_decode(file_get_contents('php://input'), true);
+$userId = $input['userId'] ?? null;
+
+$users = [
+    "1" => ["id" => "1", "name" => "Mael"],
+    "2" => ["id" => "2", "name" => "Alice"]
+];
+
+echo json_encode($users[$userId] ?? null);
+```
+#### Usage
+```ts
+import { Backend } from '@maelgruand/simple-way';
+
+const backend = new Backend('http://localhost/php');
+
+// Dynamically call any PHP script
+const user = await backend.call<{ id: string; name: string }>('getUser', { userId: '1' });
+console.log(user); // { id: "1", name: "Mael" }
+
+const result = await backend.call('processData', { data: { value: 42 } });
+console.log(result);
+```
+
+
 ![npm](https://img.shields.io/npm/v/@maelgruand/simple-way)
 ![License](https://img.shields.io/npm/l/@maelgruand/simple-way)
